@@ -17,6 +17,7 @@ public class Main {
             MiLenguajeParser parser = new MiLenguajeParser(tokens);
             ParseTree tree = parser.inicio(); // Iniciar el analisis sintáctico en la regla inicial: r
             System.out.println(tree.toStringTree(parser)); // imprime el arbol al estilo LISP
+            System.out.println("Hola mundo");
         } catch (Exception e){
             System.err.println("Error (Test): " + e);
         }
