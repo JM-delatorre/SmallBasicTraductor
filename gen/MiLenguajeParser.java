@@ -1,4 +1,4 @@
-// Generated from C:/Users/juanm/Desktop/LENGUAJES/SmallBasicTraductor/grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from /home/jmdlts/Documents/UNAL/LENGUAJES/SmallBasicTraductor/grammar/MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -25,13 +25,14 @@ public class MiLenguajeParser extends Parser {
 	public static final int
 		RULE_program = 0, RULE_statement = 1, RULE_assignment = 2, RULE_forLoop = 3, 
 		RULE_whileLoop = 4, RULE_if_statement = 5, RULE_subroutine = 6, RULE_subroutine_call = 7, 
-		RULE_argument_list = 8, RULE_expression = 9, RULE_variable = 10, RULE_number = 11, 
-		RULE_string = 12, RULE_builtIn = 13, RULE_tag = 14, RULE_goto = 15, RULE_op = 16;
+		RULE_argument_list = 8, RULE_expRule = 9, RULE_variable = 10, RULE_number = 11, 
+		RULE_string = 12, RULE_builtIn = 13, RULE_tag = 14, RULE_gotorule = 15, 
+		RULE_op = 16;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"program", "statement", "assignment", "forLoop", "whileLoop", "if_statement", 
-			"subroutine", "subroutine_call", "argument_list", "expression", "variable", 
-			"number", "string", "builtIn", "tag", "goto", "op"
+			"subroutine", "subroutine_call", "argument_list", "expRule", "variable", 
+			"number", "string", "builtIn", "tag", "gotorule", "op"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -189,8 +190,8 @@ public class MiLenguajeParser extends Parser {
 		public TagContext tag() {
 			return getRuleContext(TagContext.class,0);
 		}
-		public GotoContext goto_() {
-			return getRuleContext(GotoContext.class,0);
+		public GotoruleContext gotorule() {
+			return getRuleContext(GotoruleContext.class,0);
 		}
 		public BuiltInContext builtIn() {
 			return getRuleContext(BuiltInContext.class,0);
@@ -274,7 +275,7 @@ public class MiLenguajeParser extends Parser {
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(47);
-				goto_();
+				gotorule();
 				}
 				break;
 			case 9:
@@ -302,8 +303,8 @@ public class MiLenguajeParser extends Parser {
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
 		}
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
+		public ExpRuleContext expRule() {
+			return getRuleContext(ExpRuleContext.class,0);
 		}
 		public AssignmentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -335,7 +336,7 @@ public class MiLenguajeParser extends Parser {
 			setState(52);
 			match(T__0);
 			setState(53);
-			expression(0);
+			expRule(0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -354,11 +355,11 @@ public class MiLenguajeParser extends Parser {
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
 		}
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
+		public List<ExpRuleContext> expRule() {
+			return getRuleContexts(ExpRuleContext.class);
 		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
+		public ExpRuleContext expRule(int i) {
+			return getRuleContext(ExpRuleContext.class,i);
 		}
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
@@ -399,11 +400,11 @@ public class MiLenguajeParser extends Parser {
 			setState(57);
 			match(T__0);
 			setState(58);
-			expression(0);
+			expRule(0);
 			setState(59);
 			match(T__2);
 			setState(60);
-			expression(0);
+			expRule(0);
 			setState(63);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -412,7 +413,7 @@ public class MiLenguajeParser extends Parser {
 				setState(61);
 				match(T__3);
 				setState(62);
-				expression(0);
+				expRule(0);
 				}
 			}
 
@@ -447,8 +448,8 @@ public class MiLenguajeParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class WhileLoopContext extends ParserRuleContext {
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
+		public ExpRuleContext expRule() {
+			return getRuleContext(ExpRuleContext.class,0);
 		}
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
@@ -485,7 +486,7 @@ public class MiLenguajeParser extends Parser {
 			setState(72);
 			match(T__5);
 			setState(73);
-			expression(0);
+			expRule(0);
 			setState(75); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -517,11 +518,11 @@ public class MiLenguajeParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class If_statementContext extends ParserRuleContext {
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
+		public List<ExpRuleContext> expRule() {
+			return getRuleContexts(ExpRuleContext.class);
 		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
+		public ExpRuleContext expRule(int i) {
+			return getRuleContext(ExpRuleContext.class,i);
 		}
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
@@ -558,7 +559,7 @@ public class MiLenguajeParser extends Parser {
 			setState(81);
 			match(T__7);
 			setState(82);
-			expression(0);
+			expRule(0);
 			setState(83);
 			match(T__8);
 			setState(85); 
@@ -584,7 +585,7 @@ public class MiLenguajeParser extends Parser {
 				setState(89);
 				match(T__9);
 				setState(90);
-				expression(0);
+				expRule(0);
 				setState(91);
 				match(T__8);
 				setState(93); 
@@ -763,11 +764,11 @@ public class MiLenguajeParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Argument_listContext extends ParserRuleContext {
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
+		public List<ExpRuleContext> expRule() {
+			return getRuleContexts(ExpRuleContext.class);
 		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
+		public ExpRuleContext expRule(int i) {
+			return getRuleContext(ExpRuleContext.class,i);
 		}
 		public Argument_listContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -801,7 +802,7 @@ public class MiLenguajeParser extends Parser {
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 8521246867456L) != 0)) {
 				{
 				setState(125);
-				expression(0);
+				expRule(0);
 				}
 			}
 
@@ -819,7 +820,7 @@ public class MiLenguajeParser extends Parser {
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 8521246867456L) != 0)) {
 					{
 					setState(129);
-					expression(0);
+					expRule(0);
 					}
 				}
 
@@ -843,12 +844,12 @@ public class MiLenguajeParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ExpressionContext extends ParserRuleContext {
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
+	public static class ExpRuleContext extends ParserRuleContext {
+		public List<ExpRuleContext> expRule() {
+			return getRuleContexts(ExpRuleContext.class);
 		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
+		public ExpRuleContext expRule(int i) {
+			return getRuleContext(ExpRuleContext.class,i);
 		}
 		public TerminalNode BOOL() { return getToken(MiLenguajeParser.BOOL, 0); }
 		public NumberContext number() {
@@ -869,36 +870,36 @@ public class MiLenguajeParser extends Parser {
 		public OpContext op() {
 			return getRuleContext(OpContext.class,0);
 		}
-		public ExpressionContext(ParserRuleContext parent, int invokingState) {
+		public ExpRuleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_expression; }
+		@Override public int getRuleIndex() { return RULE_expRule; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterExpression(this);
+			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterExpRule(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitExpression(this);
+			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitExpRule(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiLenguajeVisitor ) return ((MiLenguajeVisitor<? extends T>)visitor).visitExpression(this);
+			if ( visitor instanceof MiLenguajeVisitor ) return ((MiLenguajeVisitor<? extends T>)visitor).visitExpRule(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ExpressionContext expression() throws RecognitionException {
-		return expression(0);
+	public final ExpRuleContext expRule() throws RecognitionException {
+		return expRule(0);
 	}
 
-	private ExpressionContext expression(int _p) throws RecognitionException {
+	private ExpRuleContext expRule(int _p) throws RecognitionException {
 		ParserRuleContext _parentctx = _ctx;
 		int _parentState = getState();
-		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState);
-		ExpressionContext _prevctx = _localctx;
+		ExpRuleContext _localctx = new ExpRuleContext(_ctx, _parentState);
+		ExpRuleContext _prevctx = _localctx;
 		int _startState = 18;
-		enterRecursionRule(_localctx, 18, RULE_expression, _p);
+		enterRecursionRule(_localctx, 18, RULE_expRule, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
@@ -911,7 +912,7 @@ public class MiLenguajeParser extends Parser {
 				setState(138);
 				match(T__14);
 				setState(139);
-				expression(0);
+				expRule(0);
 				setState(140);
 				match(T__15);
 				}
@@ -951,7 +952,7 @@ public class MiLenguajeParser extends Parser {
 				setState(147);
 				match(T__17);
 				setState(148);
-				expression(2);
+				expRule(2);
 				}
 				break;
 			case 8:
@@ -971,14 +972,14 @@ public class MiLenguajeParser extends Parser {
 					_prevctx = _localctx;
 					{
 					{
-					_localctx = new ExpressionContext(_parentctx, _parentState);
-					pushNewRecursionContext(_localctx, _startState, RULE_expression);
+					_localctx = new ExpRuleContext(_parentctx, _parentState);
+					pushNewRecursionContext(_localctx, _startState, RULE_expRule);
 					setState(152);
 					if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
 					setState(153);
 					op();
 					setState(154);
-					expression(9);
+					expRule(9);
 					}
 					} 
 				}
@@ -1002,11 +1003,11 @@ public class MiLenguajeParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class VariableContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(MiLenguajeParser.ID, 0); }
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
+		public List<ExpRuleContext> expRule() {
+			return getRuleContexts(ExpRuleContext.class);
 		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
+		public ExpRuleContext expRule(int i) {
+			return getRuleContext(ExpRuleContext.class,i);
 		}
 		public VariableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1046,7 +1047,7 @@ public class MiLenguajeParser extends Parser {
 					setState(162);
 					match(T__18);
 					setState(163);
-					expression(0);
+					expRule(0);
 					setState(164);
 					match(T__19);
 					}
@@ -1276,30 +1277,30 @@ public class MiLenguajeParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class GotoContext extends ParserRuleContext {
+	public static class GotoruleContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(MiLenguajeParser.ID, 0); }
-		public GotoContext(ParserRuleContext parent, int invokingState) {
+		public GotoruleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_goto; }
+		@Override public int getRuleIndex() { return RULE_gotorule; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterGoto(this);
+			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterGotorule(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitGoto(this);
+			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitGotorule(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiLenguajeVisitor ) return ((MiLenguajeVisitor<? extends T>)visitor).visitGoto(this);
+			if ( visitor instanceof MiLenguajeVisitor ) return ((MiLenguajeVisitor<? extends T>)visitor).visitGotorule(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final GotoContext goto_() throws RecognitionException {
-		GotoContext _localctx = new GotoContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_goto);
+	public final GotoruleContext gotorule() throws RecognitionException {
+		GotoruleContext _localctx = new GotoruleContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_gotorule);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -1374,11 +1375,11 @@ public class MiLenguajeParser extends Parser {
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
 		case 9:
-			return expression_sempred((ExpressionContext)_localctx, predIndex);
+			return expRule_sempred((ExpRuleContext)_localctx, predIndex);
 		}
 		return true;
 	}
-	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
+	private boolean expRule_sempred(ExpRuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
 			return precpred(_ctx, 8);

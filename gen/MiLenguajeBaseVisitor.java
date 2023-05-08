@@ -1,4 +1,4 @@
-// Generated from C:/Users/juanm/Desktop/LENGUAJES/SmallBasicTraductor/grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from /home/jmdlts/Documents/UNAL/LENGUAJES/SmallBasicTraductor/grammar/MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -80,7 +80,7 @@ public class MiLenguajeBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpression(MiLenguajeParser.ExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpRule(MiLenguajeParser.ExpRuleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -122,7 +122,7 @@ public class MiLenguajeBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGoto(MiLenguajeParser.GotoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGotorule(MiLenguajeParser.GotoruleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

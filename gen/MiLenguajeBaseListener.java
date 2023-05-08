@@ -1,4 +1,4 @@
-// Generated from C:/Users/juanm/Desktop/LENGUAJES/SmallBasicTraductor/grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from /home/jmdlts/Documents/UNAL/LENGUAJES/SmallBasicTraductor/grammar/MiLenguaje.g4 by ANTLR 4.12.0
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -124,13 +124,13 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression(MiLenguajeParser.ExpressionContext ctx) { }
+	@Override public void enterExpRule(MiLenguajeParser.ExpRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression(MiLenguajeParser.ExpressionContext ctx) { }
+	@Override public void exitExpRule(MiLenguajeParser.ExpRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -196,13 +196,13 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGoto(MiLenguajeParser.GotoContext ctx) { }
+	@Override public void enterGotorule(MiLenguajeParser.GotoruleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGoto(MiLenguajeParser.GotoContext ctx) { }
+	@Override public void exitGotorule(MiLenguajeParser.GotoruleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

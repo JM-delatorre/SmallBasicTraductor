@@ -1,4 +1,4 @@
-// Generated from C:/Users/juanm/Desktop/LENGUAJES/SmallBasicTraductor/grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from /home/jmdlts/Documents/UNAL/LENGUAJES/SmallBasicTraductor/grammar/MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -97,15 +97,15 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitArgument_list(MiLenguajeParser.Argument_listContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiLenguajeParser#expression}.
+	 * Enter a parse tree produced by {@link MiLenguajeParser#expRule}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression(MiLenguajeParser.ExpressionContext ctx);
+	void enterExpRule(MiLenguajeParser.ExpRuleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiLenguajeParser#expression}.
+	 * Exit a parse tree produced by {@link MiLenguajeParser#expRule}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression(MiLenguajeParser.ExpressionContext ctx);
+	void exitExpRule(MiLenguajeParser.ExpRuleContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#variable}.
 	 * @param ctx the parse tree
@@ -157,15 +157,15 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitTag(MiLenguajeParser.TagContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiLenguajeParser#goto}.
+	 * Enter a parse tree produced by {@link MiLenguajeParser#gotorule}.
 	 * @param ctx the parse tree
 	 */
-	void enterGoto(MiLenguajeParser.GotoContext ctx);
+	void enterGotorule(MiLenguajeParser.GotoruleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiLenguajeParser#goto}.
+	 * Exit a parse tree produced by {@link MiLenguajeParser#gotorule}.
 	 * @param ctx the parse tree
 	 */
-	void exitGoto(MiLenguajeParser.GotoContext ctx);
+	void exitGotorule(MiLenguajeParser.GotoruleContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#op}.
 	 * @param ctx the parse tree
