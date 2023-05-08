@@ -1,4 +1,28 @@
-' A new Program!
-TextWindow.WriteLine("What is your name?")
-name = TextWindow.Read()
-TextWindow.WriteLine("Hello " + name + "!")
+izq = 0
+der = 100
+eps = 0.00000001
+
+While (der - izq > eps)
+  med = (izq + der) / 2
+
+  x = med
+  fx()
+  medRes = y
+
+  x = der
+  fx()
+  derRes = y
+
+  If (medRes * derRes < 0) Then
+    izq = med
+  Else
+    der = med
+  EndIf
+EndWhile
+
+TextWindow.Write("Una raiz de la funcion está en: ")
+TextWindow.WriteLine(med)
+
+Sub fx
+  y = (x*x*x*x) - 11 * (x*x) + x - 100
+EndSub
