@@ -1,9 +1,41 @@
 b = 15
 h = 11
 
+For i = b + 1 To 4
+    i = i + 1
+    b = h+i
+EndFor
+
+If (i < 25) Then
+  i = i + 3
+EndIf
+
 rectangle_area = b*h
 triangle_area = rectangle_area/2
 
-TextWindow.WriteLine(rectangle_area)
+TextWindow.WriteLine(rectangle_area, b)
 TextWindow.WriteLine("-------")
 TextWindow.WriteLine(triangle_area)
+
+' Estructuras de datos
+
+tamano_del_arreglo = 5
+
+For i = 1 To tamano_del_arreglo
+   userNums[i] = i * 2
+   userVals[4-i] = (4 * i) / 2
+EndFor
+
+Stack.PushValue(mi_stack, userNums[3])
+Stack.PushValue(mi_stack, userVals[3])
+
+For i = 1 To tamano_del_arreglo
+   mi_dict["Parte " + i] = userNums[i]
+EndFor
+
+y = Stack.PopValue(mi_stack)
+x = Stack.PopValue(mi_stack)
+
+For i = 1 To tamano_del_arreglo
+   TextWindow.WriteLine(mi_dict["Parte " + i] - x + y)
+EndFor

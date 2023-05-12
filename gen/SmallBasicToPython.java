@@ -23,32 +23,38 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
     }
 
     @Override public void exitStatement(MiLenguajeParser.StatementContext ctx) {
+        codeBuilder.append("\n");
     }
 
     @Override public void enterAssignment(MiLenguajeParser.AssignmentContext ctx) {
         String varName = ctx.variable().getText();
-        String value = ctx.expRule().getText();
-        codeBuilder.append(varName + " = " + value + "\n");
-        // add typing system
+//        String value = ctx.expRule().getText();
+        codeBuilder.append(varName + " = ");
     }
 
     @Override public void exitAssignment(MiLenguajeParser.AssignmentContext ctx) { }
 
+//    @Override public void enterStepForLoop(MiLenguajeParser.StepForLoopContext ctx) {
+//        codeBuilder.append(",");
+//    }
+//
+//    @Override public void exitStepForLoop(MiLenguajeParser.StepForLoopContext ctx) {
+//    }
+//
+//    @Override public void enterToForLoop(MiLenguajeParser.ToForLoopContext ctx) {
+//        codeBuilder.append(",1+");
+//    }
+//
+//    @Override public void exitToForLoop(MiLenguajeParser.ToForLoopContext ctx) {
+//        codeBuilder.append("):");
+//    }
+
+
     @Override public void enterForLoop(MiLenguajeParser.ForLoopContext ctx) {
+        System.out.println("holaaa");
         counterTabs += 1;
         String varName = ctx.variable().getText();
-        String start = ctx.expRule(0).getText();
-        String end = ctx.expRule(1).getText();
-        String step = "1";
-        if (ctx.expRule().size() == 3) {
-            step = ctx.expRule(2).getText();
-        }
-        if (step == "1"){
-            codeBuilder.append("for "+ varName + " in range(" + start + ", " + end +") :\n");
-        }else{
-            codeBuilder.append("for "+ varName + " in range(" + start + ", " + end +", "+step+") :\n");
-        }
-
+        codeBuilder.append("for "+ varName + " in range(");
 
     }
 
@@ -116,7 +122,9 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
 
     @Override public void exitArgument_list(MiLenguajeParser.Argument_listContext ctx) { }
 
-    @Override public void enterExpRule(MiLenguajeParser.ExpRuleContext ctx) { }
+    @Override public void enterExpRule(MiLenguajeParser.ExpRuleContext ctx) {
+
+    }
 
     @Override public void exitExpRule(MiLenguajeParser.ExpRuleContext ctx) { }
 
@@ -124,9 +132,13 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
 
     @Override public void exitVariable(MiLenguajeParser.VariableContext ctx) { }
 
-    @Override public void enterNumber(MiLenguajeParser.NumberContext ctx) { }
+    @Override public void enterNumber(MiLenguajeParser.NumberContext ctx) {
+        codeBuilder.append(ctx.getText());
+    }
 
-    @Override public void exitNumber(MiLenguajeParser.NumberContext ctx) {}
+    @Override public void exitNumber(MiLenguajeParser.NumberContext ctx) {
+
+    }
 
     @Override public void enterString(MiLenguajeParser.StringContext ctx) { }
 
@@ -174,7 +186,7 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
                                     this.codeBuilder.append(", "+args.get(i).getText());
                                 }
                             }
-                            this.codeBuilder.append(")\n");
+                            this.codeBuilder.append(",end=\"\")\n");
                         }
                         break;
                     case "WriteLine":
@@ -193,8 +205,11 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
                         break;
                     case "Read":
                         String variableName = args.get(0).getText();
-                        this.codeBuilder.append("Scanner scanner = new Scanner(System.in);\n");
-                        this.codeBuilder.append(variableName + " = scanner.nextDouble();\n");
+                        this.codeBuilder.append(variableName + " = input()\n");
+                        break;
+                    case "ReadNumber":
+                        String variableName2 = args.get(0).getText();
+                        this.codeBuilder.append(variableName2 + " = int(input())\n");
                         break;
                 }
                 break;
@@ -228,11 +243,8 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
     }
 
     public void stackFunction(List<MiLenguajeParser.ExpRuleContext> args, String nameFunction){
-        /*PushValue(stack, value)
-                PopValue(stack)
-                GetCount(stack)
-        */
         switch(nameFunction){
+
             case "PushValue":
                 this.codeBuilder.append(args.get(0).getText()+".push("+args.get(1).getText()+")\n");
                 break;
