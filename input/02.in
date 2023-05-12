@@ -1,0 +1,22 @@
+' Triángulo de Pascal
+
+rows = 8
+
+For i = 0 To rows - 1
+   For space = 1 To rows - i 
+      TextWindow.Write("   ")
+   EndFor
+
+   For j = 0 To i Step 1
+      If (j = 0 Or i = 0) Then
+         coef = 1
+      Else
+         coef = coef * (i - j + 1) / j
+      EndIf
+
+      TextWindow.Write(coef)
+      TextWindow.Write("  ")
+   EndFor
+
+   TextWindow.WriteLine("")
+EndFor
