@@ -1,4 +1,4 @@
-// Generated from /home/jmdlts/Documents/UNAL/LENGUAJES/SmallBasicTraductor/grammar/MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from C:/Users/juanm/Desktop/LENGUAJES/SmallBasicTraductor/grammar\MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -28,11 +28,29 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignment(MiLenguajeParser.AssignmentContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#stepForLoop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStepForLoop(MiLenguajeParser.StepForLoopContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#toForLoop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitToForLoop(MiLenguajeParser.ToForLoopContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#forLoop}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitForLoop(MiLenguajeParser.ForLoopContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#forParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForParameters(MiLenguajeParser.ForParametersContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#whileLoop}.
 	 * @param ctx the parse tree
@@ -40,11 +58,29 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhileLoop(MiLenguajeParser.WhileLoopContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#conditionalParams}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConditionalParams(MiLenguajeParser.ConditionalParamsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#if_statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitIf_statement(MiLenguajeParser.If_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#elseif_statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseif_statement(MiLenguajeParser.Elseif_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#else_statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElse_statement(MiLenguajeParser.Else_statementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#subroutine}.
 	 * @param ctx the parse tree
@@ -117,4 +153,10 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOp(MiLenguajeParser.OpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssign(MiLenguajeParser.AssignContext ctx);
 }

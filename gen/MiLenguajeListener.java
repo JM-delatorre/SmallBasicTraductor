@@ -1,4 +1,4 @@
-// Generated from /home/jmdlts/Documents/UNAL/LENGUAJES/SmallBasicTraductor/grammar/MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from C:/Users/juanm/Desktop/LENGUAJES/SmallBasicTraductor/grammar\MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -37,6 +37,26 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitAssignment(MiLenguajeParser.AssignmentContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#stepForLoop}.
+	 * @param ctx the parse tree
+	 */
+	void enterStepForLoop(MiLenguajeParser.StepForLoopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#stepForLoop}.
+	 * @param ctx the parse tree
+	 */
+	void exitStepForLoop(MiLenguajeParser.StepForLoopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#toForLoop}.
+	 * @param ctx the parse tree
+	 */
+	void enterToForLoop(MiLenguajeParser.ToForLoopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#toForLoop}.
+	 * @param ctx the parse tree
+	 */
+	void exitToForLoop(MiLenguajeParser.ToForLoopContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#forLoop}.
 	 * @param ctx the parse tree
 	 */
@@ -46,6 +66,16 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitForLoop(MiLenguajeParser.ForLoopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#forParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterForParameters(MiLenguajeParser.ForParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#forParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitForParameters(MiLenguajeParser.ForParametersContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#whileLoop}.
 	 * @param ctx the parse tree
@@ -57,6 +87,16 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitWhileLoop(MiLenguajeParser.WhileLoopContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#conditionalParams}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionalParams(MiLenguajeParser.ConditionalParamsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#conditionalParams}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionalParams(MiLenguajeParser.ConditionalParamsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#if_statement}.
 	 * @param ctx the parse tree
 	 */
@@ -66,6 +106,26 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIf_statement(MiLenguajeParser.If_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#elseif_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseif_statement(MiLenguajeParser.Elseif_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#elseif_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseif_statement(MiLenguajeParser.Elseif_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#else_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterElse_statement(MiLenguajeParser.Else_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#else_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitElse_statement(MiLenguajeParser.Else_statementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#subroutine}.
 	 * @param ctx the parse tree
@@ -186,4 +246,14 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOp(MiLenguajeParser.OpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssign(MiLenguajeParser.AssignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssign(MiLenguajeParser.AssignContext ctx);
 }

@@ -26,36 +26,32 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
         codeBuilder.append("\n");
     }
 
-    @Override public void enterAssignment(MiLenguajeParser.AssignmentContext ctx) {
-        String varName = ctx.variable().getText();
-//        String value = ctx.expRule().getText();
-        codeBuilder.append(varName + " = ");
-    }
+    @Override public void enterAssignment(MiLenguajeParser.AssignmentContext ctx) {}
 
     @Override public void exitAssignment(MiLenguajeParser.AssignmentContext ctx) { }
 
-//    @Override public void enterStepForLoop(MiLenguajeParser.StepForLoopContext ctx) {
-//        codeBuilder.append(",");
-//    }
-//
-//    @Override public void exitStepForLoop(MiLenguajeParser.StepForLoopContext ctx) {
-//    }
-//
-//    @Override public void enterToForLoop(MiLenguajeParser.ToForLoopContext ctx) {
-//        codeBuilder.append(",1+");
-//    }
-//
-//    @Override public void exitToForLoop(MiLenguajeParser.ToForLoopContext ctx) {
-//        codeBuilder.append("):");
-//    }
+    @Override public void enterStepForLoop(MiLenguajeParser.StepForLoopContext ctx) {
+        codeBuilder.append(",");
+    }
 
+    @Override public void exitStepForLoop(MiLenguajeParser.StepForLoopContext ctx) {
+    }
 
+    @Override public void enterToForLoop(MiLenguajeParser.ToForLoopContext ctx) {
+        codeBuilder.append(",1+");
+    }
+
+    @Override public void exitToForLoop(MiLenguajeParser.ToForLoopContext ctx) {
+        codeBuilder.append("):\n");
+    }
+
+    @Override public void enterForParameters(MiLenguajeParser.ForParametersContext ctx) {
+        codeBuilder.append(" in range(");
+    }
+    @Override public void exitForParameters(MiLenguajeParser.ForParametersContext ctx) { }
     @Override public void enterForLoop(MiLenguajeParser.ForLoopContext ctx) {
-        System.out.println("holaaa");
         counterTabs += 1;
-        String varName = ctx.variable().getText();
-        codeBuilder.append("for "+ varName + " in range(");
-
+        codeBuilder.append("for ");
     }
 
     @Override public void exitForLoop(MiLenguajeParser.ForLoopContext ctx) {
@@ -63,20 +59,23 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
     }
 
     @Override public void enterWhileLoop(MiLenguajeParser.WhileLoopContext ctx) {
-        String condition = ctx.expRule().getText();
         counterTabs+=1;
-        codeBuilder.append("while ("+condition+") :\n");
+        codeBuilder.append("while (");
     }
 
     @Override public void exitWhileLoop(MiLenguajeParser.WhileLoopContext ctx) {
         counterTabs-=1;
     }
 
-    //TODO deal with it : only has the if (and not the else if and else, that should be in other methods
+    @Override public void enterConditionalParams(MiLenguajeParser.ConditionalParamsContext ctx) { }
+
+    @Override public void exitConditionalParams(MiLenguajeParser.ConditionalParamsContext ctx) {
+        codeBuilder.append("):\n");
+    }
+
     @Override public void enterIf_statement(MiLenguajeParser.If_statementContext ctx) {
         counterTabs +=1;
-        String condition = ctx.expRule(0).getText();
-        codeBuilder.append("if "+condition+" :\n");
+        codeBuilder.append("if (");
     }
 
     @Override public void exitIf_statement(MiLenguajeParser.If_statementContext ctx) {
@@ -103,7 +102,7 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
 
     @Override public void enterSubroutine(MiLenguajeParser.SubroutineContext ctx) {
         String subroutineName = ctx.ID().getText();
-        codeBuilder.append("def " + subroutineName + "() :\n");
+        codeBuilder.append("def "+subroutineName + "():\n");
         counterTabs+=1;
     }
 
@@ -128,7 +127,13 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
 
     @Override public void exitExpRule(MiLenguajeParser.ExpRuleContext ctx) { }
 
-    @Override public void enterVariable(MiLenguajeParser.VariableContext ctx) { }
+    @Override public void enterVariable(MiLenguajeParser.VariableContext ctx) {
+        if (ctx.getText().equals("return")) {
+            codeBuilder.append(ctx.getText() + "josuehp");
+        }else {
+            codeBuilder.append(ctx.getText());
+        }
+    }
 
     @Override public void exitVariable(MiLenguajeParser.VariableContext ctx) { }
 
@@ -150,6 +155,8 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
 
         String fname = ctx.builtIn_name().getText();
         String subfunction = ctx.ID().getSymbol().getText();
+        System.out.println(fname);
+        System.out.println(subfunction);
         List<MiLenguajeParser.ExpRuleContext> args = ctx.argument_list().expRule();
 
         switch (fname) {
@@ -266,9 +273,17 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
     @Override public void exitGotorule(MiLenguajeParser.GotoruleContext ctx) { }
 
     @Override public void enterOp(MiLenguajeParser.OpContext ctx) {
+        codeBuilder.append(ctx.getText());
     }
 
-    @Override public void exitOp(MiLenguajeParser.OpContext ctx) { }
+    @Override public void exitOp(MiLenguajeParser.OpContext ctx) {
+
+    }
+    @Override public void enterAssign(MiLenguajeParser.AssignContext ctx) {
+        codeBuilder.append(" = ");
+    }
+
+    @Override public void exitAssign(MiLenguajeParser.AssignContext ctx) { }
 
     @Override public void enterEveryRule(ParserRuleContext ctx) { }
 
