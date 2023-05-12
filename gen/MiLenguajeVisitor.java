@@ -64,11 +64,11 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArgument_list(MiLenguajeParser.Argument_listContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiLenguajeParser#expression}.
+	 * Visit a parse tree produced by {@link MiLenguajeParser#expRule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(MiLenguajeParser.ExpressionContext ctx);
+	T visitExpRule(MiLenguajeParser.ExpRuleContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#variable}.
 	 * @param ctx the parse tree
@@ -88,6 +88,12 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitString(MiLenguajeParser.StringContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#builtIn_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBuiltIn_name(MiLenguajeParser.BuiltIn_nameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#builtIn}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -100,11 +106,11 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTag(MiLenguajeParser.TagContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiLenguajeParser#goto}.
+	 * Visit a parse tree produced by {@link MiLenguajeParser#gotorule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGoto(MiLenguajeParser.GotoContext ctx);
+	T visitGotorule(MiLenguajeParser.GotoruleContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#op}.
 	 * @param ctx the parse tree
