@@ -1,4 +1,4 @@
-// Generated from C:/Users/juanm/Desktop/LENGUAJES/SmallBasicTraductor/grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from E:/Documents/insa/UNAL/Lenguajes/SmallBasicTraductor/grammar\MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -64,6 +64,12 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConditionalParams(MiLenguajeParser.ConditionalParamsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#if}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf(MiLenguajeParser.IfContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#if_statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -112,6 +118,12 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariable(MiLenguajeParser.VariableContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#variable_dict}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable_dict(MiLenguajeParser.Variable_dictContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#builtIn_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -153,6 +165,12 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitString(MiLenguajeParser.StringContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#boolean}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolean(MiLenguajeParser.BooleanContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#assign}.
 	 * @param ctx the parse tree

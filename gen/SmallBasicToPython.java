@@ -3,15 +3,29 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class SmallBasicToPython extends MiLenguajeBaseListener {
     private final StringBuilder codeBuilder = new StringBuilder();
     private int counterTabs = 0;
+
+    //params for special cases
+    //check if we are in a condition
+    private boolean condition = false;
+
+    //check if we are in a builtin
     private String builtinName = "";
     private String builtinFunction = "";
-    private List<String> bulitinArguments = new ArrayList<String>();
+    private List<String> builtinArguments = new ArrayList<String>();
+
+    //check if an import type, a definition signature exists
+    private Set<String> addons = new HashSet<>();
+    private int counterCharactersImport = 0 ;
+    private int counterCharactersFunction = 0;
+
 
     @Override public void enterProgram(MiLenguajeParser.ProgramContext ctx) { }
 
@@ -71,11 +85,19 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
         counterTabs-=1;
     }
 
-    @Override public void enterConditionalParams(MiLenguajeParser.ConditionalParamsContext ctx) { }
+    @Override public void enterConditionalParams(MiLenguajeParser.ConditionalParamsContext ctx) {
+        this.condition = true;
+    }
 
     @Override public void exitConditionalParams(MiLenguajeParser.ConditionalParamsContext ctx) {
+        this.condition = false;
         codeBuilder.append("):\n");
     }
+
+    @Override public void enterIf(MiLenguajeParser.IfContext ctx) {
+    }
+
+    @Override public void exitIf(MiLenguajeParser.IfContext ctx) { }
 
     @Override public void enterIf_statement(MiLenguajeParser.If_statementContext ctx) {
         counterTabs +=1;
@@ -86,23 +108,35 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
         counterTabs-=1;
     }
 
-    /*
     @Override public void enterElseif_statement(MiLenguajeParser.Elseif_statementContext ctx) {
+        if (counterTabs == 0)
+            codeBuilder.append("elif (");
+        else{
+            for (int i=0; i<counterTabs; i++)
+                codeBuilder.append("\t");
+            codeBuilder.append("elif (");
+        }
         counterTabs +=1;
-        codeBuilder.append("elif (");
     }
 
     @Override public void exitElseif_statement(MiLenguajeParser.Elseif_statementContext ctx) {
-        codeBuilder.append("}\n");
+        counterTabs -=1;
     }
 
     @Override public void enterElse_statement(MiLenguajeParser.Else_statementContext ctx) {
-        codeBuilder.append("} else {\n");
+        if (counterTabs == 0)
+            codeBuilder.append("else : \n");
+        else{
+            for (int i=0; i<counterTabs; i++)
+                codeBuilder.append("\t");
+            codeBuilder.append("else :\n");
+        }
+        counterTabs +=1;
     }
 
     @Override public void exitElse_statement(MiLenguajeParser.Else_statementContext ctx) {
-        codeBuilder.append("}\n");
-    }*/
+        counterTabs -=1;
+    }
 
     @Override public void enterSubroutine(MiLenguajeParser.SubroutineContext ctx) {
         String subroutineName = ctx.ID().getText();
@@ -132,26 +166,40 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
     @Override public void exitExpRule(MiLenguajeParser.ExpRuleContext ctx) { }
 
     @Override public void enterVariable(MiLenguajeParser.VariableContext ctx) {
-        if(!(this.bulitinArguments.size() > 0)){
-            if (ctx.getText().equals("return")) {
-                codeBuilder.append(ctx.getText() + "josuehp");
+        if(!(this.builtinArguments.size() > 0)){
+            if (ctx.ID().getSymbol().getText().equals("return")) {
+                codeBuilder.append(ctx.ID().getSymbol().getText() + "josuehp");
             }else {
-                codeBuilder.append(ctx.getText());
+                codeBuilder.append(ctx.ID().getSymbol().getText());
             }
         }
     }
 
     @Override public void exitVariable(MiLenguajeParser.VariableContext ctx) { }
 
+    @Override public void enterVariable_dict(MiLenguajeParser.Variable_dictContext ctx) {
+        if(!(this.builtinArguments.size() > 0))
+            codeBuilder.append("[");
+    }
+
+    @Override public void exitVariable_dict(MiLenguajeParser.Variable_dictContext ctx) {
+        if(!(this.builtinArguments.size() > 0))
+            codeBuilder.append("]");
+    }
+
     @Override public void enterNumber(MiLenguajeParser.NumberContext ctx) {
-        codeBuilder.append(ctx.getText());
+        if(!(this.builtinArguments.size() > 0))
+            codeBuilder.append(ctx.getText());
     }
 
     @Override public void exitNumber(MiLenguajeParser.NumberContext ctx) {
 
     }
 
-    @Override public void enterString(MiLenguajeParser.StringContext ctx) { }
+    @Override public void enterString(MiLenguajeParser.StringContext ctx) {
+        if(!(this.builtinArguments.size() > 0))
+            codeBuilder.append(ctx.getText());
+    }
 
     @Override public void exitString(MiLenguajeParser.StringContext ctx) { }
 
@@ -161,11 +209,12 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
         List<MiLenguajeParser.ExpRuleContext> args = ctx.argument_list().expRule();
         for (int i = 0; i < args.size(); i++) {
             if (((args.get(i)).getText()).equals("return")) {
-                this.bulitinArguments.add((args.get(i)).getText() + "josuehp");
+                this.builtinArguments.add((args.get(i)).getText() + "josuehp");
             }else{
-                this.bulitinArguments.add((args.get(i)).getText());
+                this.builtinArguments.add((args.get(i)).getText());
             }
         }
+
     }
 
     @Override public void exitBuiltIn(MiLenguajeParser.BuiltInContext ctx) {
@@ -184,7 +233,7 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
         }
         this.builtinName = "";
         this.builtinFunction = "";
-        this.bulitinArguments = new ArrayList<String>();
+        this.builtinArguments = new ArrayList<String>();
     }
 
     public void arrayFunction(){
@@ -192,16 +241,28 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
             case "ContainsIndex":
                 break;
             case "ContainsValue":
+                //create a function that checks if a value is in a list
+                //the function would then be called at the supposed line
+                if (!this.addons.contains("contains_value")){
+                    String stringFunction = "def contains_value("+this.builtinArguments.get(0)+", "+this.builtinArguments.get(1)+") :\n";
+                    stringFunction += "\tif (value in list):\n" +"\t\treturn true\n" +"\telse :\n" +"\t\treturn false\n\n";
+
+                    this.codeBuilder.insert(counterCharactersFunction+counterCharactersImport,stringFunction);
+                    this.addons.add("contains_value");
+                    this.counterCharactersFunction += stringFunction.length();
+                }
+                this.codeBuilder.append("contains_value("+this.builtinArguments.get(0)+", "+this.builtinArguments.get(1)+")");
                 break;
             case "GetAllIndices":
                 break;
             case "GetItemCount":
-                this.codeBuilder.append("len("+this.bulitinArguments.get(0)+")");
+                this.codeBuilder.append("len("+this.builtinArguments.get(0)+")");
                 break;
             case "IsArray":
+                this.codeBuilder.append("type("+this.builtinArguments.get(0)+" is list");
                 break;
             case "RemoveValue":
-                this.codeBuilder.append("del "+this.bulitinArguments.get(0)+"["+this.bulitinArguments.get(1)+"]");
+                this.codeBuilder.append("del "+this.builtinArguments.get(0)+"["+this.builtinArguments.get(1)+"]");
                 break;
         }
     }
@@ -210,13 +271,13 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
         switch(this.builtinFunction){
 
             case "PushValue":
-                this.codeBuilder.append(this.bulitinArguments.get(0)+".push("+this.bulitinArguments.get(1)+")");
+                this.codeBuilder.append(this.builtinArguments.get(0)+".push("+this.builtinArguments.get(1)+")");
                 break;
             case "PopValue":
-                this.codeBuilder.append(this.bulitinArguments.get(0)+".pop()");
+                this.codeBuilder.append(this.builtinArguments.get(0)+".pop()");
                 break;
             case "GetCount":
-                this.codeBuilder.append(this.bulitinArguments.get(0)+".size()");
+                this.codeBuilder.append(this.builtinArguments.get(0)+".size()");
                 break;
         }
     }
@@ -225,13 +286,13 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
         switch (this.builtinFunction) {
             case "Write":
                 this.codeBuilder.append("print(");
-                if (this.bulitinArguments.size()==0)
+                if (this.builtinArguments.size()==0)
                     this.codeBuilder.append(")");
                 else {
-                    this.codeBuilder.append(this.bulitinArguments.get(0));
-                    if (this.bulitinArguments.size()>1) {
-                        for (int i = 1; i < this.bulitinArguments.size(); i++) {
-                            this.codeBuilder.append(", "+this.bulitinArguments.get(i));
+                    this.codeBuilder.append(this.builtinArguments.get(0));
+                    if (this.builtinArguments.size()>1) {
+                        for (int i = 1; i < this.builtinArguments.size(); i++) {
+                            this.codeBuilder.append(", "+this.builtinArguments.get(i));
                         }
                     }
                     this.codeBuilder.append(",end=\"\")");
@@ -239,24 +300,24 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
                 break;
             case "WriteLine":
                 this.codeBuilder.append("print(");
-                if (this.bulitinArguments.size()==0)
+                if (this.builtinArguments.size()==0)
                     this.codeBuilder.append(")");
                 else {
-                    this.codeBuilder.append(this.bulitinArguments.get(0));
-                    if (this.bulitinArguments.size()>1) {
-                        for (int i = 1; i < this.bulitinArguments.size(); i++) {
-                            this.codeBuilder.append(", "+this.bulitinArguments.get(i));
+                    this.codeBuilder.append(this.builtinArguments.get(0));
+                    if (this.builtinArguments.size()>1) {
+                        for (int i = 1; i < this.builtinArguments.size(); i++) {
+                            this.codeBuilder.append(", "+this.builtinArguments.get(i));
                         }
                     }
                     this.codeBuilder.append(")");
                 }
                 break;
             case "Read":
-                String variableName = this.bulitinArguments.get(0);
+                String variableName = this.builtinArguments.get(0);
                 this.codeBuilder.append(variableName + " = input()");
                 break;
             case "ReadNumber":
-                String variableName2 = this.bulitinArguments.get(0);
+                String variableName2 = this.builtinArguments.get(0);
                 this.codeBuilder.append(variableName2 + " = int(input())");
                 break;
         }
@@ -265,7 +326,12 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
     public void programFunction(){
         switch (this.builtinFunction) {
             case "delay":
-                this.codeBuilder.append("time.sleep("+Integer.valueOf(this.bulitinArguments.get(0))/1000+")");
+                if (!this.addons.contains("time")){
+                    this.codeBuilder.insert(0,"import time\n\n");
+                    this.addons.add("time");
+                    this.counterCharactersImport += "import time\n\n".length();
+                }
+                this.codeBuilder.append("time.sleep("+Float.valueOf(this.builtinArguments.get(0))/1000+")");
                 break;
             case "End":
                 this.codeBuilder.append("quit()\n");
@@ -281,12 +347,29 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
     @Override public void exitGotorule(MiLenguajeParser.GotoruleContext ctx) { }
 
     @Override public void enterOp(MiLenguajeParser.OpContext ctx) {
-        codeBuilder.append(ctx.getText());
+        if(!(this.builtinArguments.size() > 0)) {
+            if (ctx.getText().equals("Or"))
+                codeBuilder.append(" or ");
+            else if (ctx.getText().equals("And"))
+                codeBuilder.append(" and ");
+            else if (this.condition == true && ctx.getText().equals("="))
+                codeBuilder.append(" == ");
+            else
+                codeBuilder.append(" " + ctx.getText() + " ");
+        }
     }
 
-    @Override public void exitOp(MiLenguajeParser.OpContext ctx) {
+    @Override public void exitOp(MiLenguajeParser.OpContext ctx) {}
 
+    @Override public void enterBoolean(MiLenguajeParser.BooleanContext ctx) {
+        if (ctx.TRUE() != null)
+            codeBuilder.append("true");
+        else
+            codeBuilder.append("false");
     }
+
+    @Override public void exitBoolean(MiLenguajeParser.BooleanContext ctx) { }
+
     @Override public void enterAssign(MiLenguajeParser.AssignContext ctx) {
         codeBuilder.append(" = ");
     }

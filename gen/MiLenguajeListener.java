@@ -1,4 +1,4 @@
-// Generated from C:/Users/juanm/Desktop/LENGUAJES/SmallBasicTraductor/grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from E:/Documents/insa/UNAL/Lenguajes/SmallBasicTraductor/grammar\MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -97,6 +97,16 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitConditionalParams(MiLenguajeParser.ConditionalParamsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#if}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf(MiLenguajeParser.IfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#if}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf(MiLenguajeParser.IfContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#if_statement}.
 	 * @param ctx the parse tree
 	 */
@@ -177,6 +187,16 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitVariable(MiLenguajeParser.VariableContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#variable_dict}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable_dict(MiLenguajeParser.Variable_dictContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#variable_dict}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable_dict(MiLenguajeParser.Variable_dictContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#builtIn_name}.
 	 * @param ctx the parse tree
 	 */
@@ -246,6 +266,16 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitString(MiLenguajeParser.StringContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#boolean}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolean(MiLenguajeParser.BooleanContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#boolean}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolean(MiLenguajeParser.BooleanContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#assign}.
 	 * @param ctx the parse tree
