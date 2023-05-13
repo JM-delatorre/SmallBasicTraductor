@@ -112,18 +112,6 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariable(MiLenguajeParser.VariableContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiLenguajeParser#number}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNumber(MiLenguajeParser.NumberContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MiLenguajeParser#string}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitString(MiLenguajeParser.StringContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#builtIn_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -153,6 +141,18 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOp(MiLenguajeParser.OpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#number}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumber(MiLenguajeParser.NumberContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#string}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitString(MiLenguajeParser.StringContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#assign}.
 	 * @param ctx the parse tree

@@ -177,26 +177,6 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitVariable(MiLenguajeParser.VariableContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiLenguajeParser#number}.
-	 * @param ctx the parse tree
-	 */
-	void enterNumber(MiLenguajeParser.NumberContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiLenguajeParser#number}.
-	 * @param ctx the parse tree
-	 */
-	void exitNumber(MiLenguajeParser.NumberContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiLenguajeParser#string}.
-	 * @param ctx the parse tree
-	 */
-	void enterString(MiLenguajeParser.StringContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiLenguajeParser#string}.
-	 * @param ctx the parse tree
-	 */
-	void exitString(MiLenguajeParser.StringContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#builtIn_name}.
 	 * @param ctx the parse tree
 	 */
@@ -246,6 +226,26 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOp(MiLenguajeParser.OpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#number}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumber(MiLenguajeParser.NumberContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#number}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumber(MiLenguajeParser.NumberContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void enterString(MiLenguajeParser.StringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void exitString(MiLenguajeParser.StringContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#assign}.
 	 * @param ctx the parse tree

@@ -27,16 +27,16 @@ public class MiLenguajeParser extends Parser {
 		RULE_toForLoop = 4, RULE_forLoop = 5, RULE_forParameters = 6, RULE_whileLoop = 7, 
 		RULE_conditionalParams = 8, RULE_if_statement = 9, RULE_elseif_statement = 10, 
 		RULE_else_statement = 11, RULE_subroutine = 12, RULE_subroutine_call = 13, 
-		RULE_argument_list = 14, RULE_expRule = 15, RULE_variable = 16, RULE_number = 17, 
-		RULE_string = 18, RULE_builtIn_name = 19, RULE_builtIn = 20, RULE_tag = 21, 
-		RULE_gotorule = 22, RULE_op = 23, RULE_assign = 24;
+		RULE_argument_list = 14, RULE_expRule = 15, RULE_variable = 16, RULE_builtIn_name = 17, 
+		RULE_builtIn = 18, RULE_tag = 19, RULE_gotorule = 20, RULE_op = 21, RULE_number = 22, 
+		RULE_string = 23, RULE_assign = 24;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"program", "statement", "assignment", "stepForLoop", "toForLoop", "forLoop", 
 			"forParameters", "whileLoop", "conditionalParams", "if_statement", "elseif_statement", 
 			"else_statement", "subroutine", "subroutine_call", "argument_list", "expRule", 
-			"variable", "number", "string", "builtIn_name", "builtIn", "tag", "gotorule", 
-			"op", "assign"
+			"variable", "builtIn_name", "builtIn", "tag", "gotorule", "op", "number", 
+			"string", "assign"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -1369,102 +1369,6 @@ public class MiLenguajeParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class NumberContext extends ParserRuleContext {
-		public TerminalNode INT() { return getToken(MiLenguajeParser.INT, 0); }
-		public TerminalNode FLOAT() { return getToken(MiLenguajeParser.FLOAT, 0); }
-		public NumberContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_number; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterNumber(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitNumber(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiLenguajeVisitor ) return ((MiLenguajeVisitor<? extends T>)visitor).visitNumber(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final NumberContext number() throws RecognitionException {
-		NumberContext _localctx = new NumberContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_number);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(196);
-			_la = _input.LA(1);
-			if ( !(_la==INT || _la==FLOAT) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class StringContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(MiLenguajeParser.STRING, 0); }
-		public StringContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_string; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterString(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitString(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiLenguajeVisitor ) return ((MiLenguajeVisitor<? extends T>)visitor).visitString(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final StringContext string() throws RecognitionException {
-		StringContext _localctx = new StringContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_string);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(198);
-			match(STRING);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
 	public static class BuiltIn_nameContext extends ParserRuleContext {
 		public BuiltIn_nameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1487,12 +1391,12 @@ public class MiLenguajeParser extends Parser {
 
 	public final BuiltIn_nameContext builtIn_name() throws RecognitionException {
 		BuiltIn_nameContext _localctx = new BuiltIn_nameContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_builtIn_name);
+		enterRule(_localctx, 34, RULE_builtIn_name);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(200);
+			setState(196);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 31457280L) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1545,21 +1449,21 @@ public class MiLenguajeParser extends Parser {
 
 	public final BuiltInContext builtIn() throws RecognitionException {
 		BuiltInContext _localctx = new BuiltInContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_builtIn);
+		enterRule(_localctx, 36, RULE_builtIn);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(202);
+			setState(198);
 			builtIn_name();
-			setState(203);
+			setState(199);
 			match(T__24);
-			setState(204);
+			setState(200);
 			match(ID);
-			setState(205);
+			setState(201);
 			match(T__14);
-			setState(206);
+			setState(202);
 			argument_list();
-			setState(207);
+			setState(203);
 			match(T__15);
 			}
 		}
@@ -1598,13 +1502,13 @@ public class MiLenguajeParser extends Parser {
 
 	public final TagContext tag() throws RecognitionException {
 		TagContext _localctx = new TagContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_tag);
+		enterRule(_localctx, 38, RULE_tag);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(209);
+			setState(205);
 			match(ID);
-			setState(210);
+			setState(206);
 			match(T__25);
 			}
 		}
@@ -1643,13 +1547,13 @@ public class MiLenguajeParser extends Parser {
 
 	public final GotoruleContext gotorule() throws RecognitionException {
 		GotoruleContext _localctx = new GotoruleContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_gotorule);
+		enterRule(_localctx, 40, RULE_gotorule);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(212);
+			setState(208);
 			match(T__26);
-			setState(213);
+			setState(209);
 			match(ID);
 			}
 		}
@@ -1687,12 +1591,12 @@ public class MiLenguajeParser extends Parser {
 
 	public final OpContext op() throws RecognitionException {
 		OpContext _localctx = new OpContext(_ctx, getState());
-		enterRule(_localctx, 46, RULE_op);
+		enterRule(_localctx, 42, RULE_op);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(215);
+			setState(211);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 274609733664L) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1702,6 +1606,102 @@ public class MiLenguajeParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class NumberContext extends ParserRuleContext {
+		public TerminalNode INT() { return getToken(MiLenguajeParser.INT, 0); }
+		public TerminalNode FLOAT() { return getToken(MiLenguajeParser.FLOAT, 0); }
+		public NumberContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_number; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterNumber(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitNumber(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiLenguajeVisitor ) return ((MiLenguajeVisitor<? extends T>)visitor).visitNumber(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final NumberContext number() throws RecognitionException {
+		NumberContext _localctx = new NumberContext(_ctx, getState());
+		enterRule(_localctx, 44, RULE_number);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(213);
+			_la = _input.LA(1);
+			if ( !(_la==INT || _la==FLOAT) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class StringContext extends ParserRuleContext {
+		public TerminalNode STRING() { return getToken(MiLenguajeParser.STRING, 0); }
+		public StringContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_string; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).enterString(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiLenguajeListener ) ((MiLenguajeListener)listener).exitString(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiLenguajeVisitor ) return ((MiLenguajeVisitor<? extends T>)visitor).visitString(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final StringContext string() throws RecognitionException {
+		StringContext _localctx = new StringContext(_ctx, getState());
+		enterRule(_localctx, 46, RULE_string);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(215);
+			match(STRING);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1803,30 +1803,30 @@ public class MiLenguajeParser extends Parser {
 		"\u000f\u0001\u000f\u0005\u000f\u00b6\b\u000f\n\u000f\f\u000f\u00b9\t\u000f"+
 		"\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0005\u0010"+
 		"\u00c0\b\u0010\n\u0010\f\u0010\u00c3\t\u0010\u0001\u0011\u0001\u0011\u0001"+
-		"\u0012\u0001\u0012\u0001\u0013\u0001\u0013\u0001\u0014\u0001\u0014\u0001"+
-		"\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0015\u0001"+
-		"\u0015\u0001\u0015\u0001\u0016\u0001\u0016\u0001\u0016\u0001\u0017\u0001"+
+		"\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001"+
+		"\u0012\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0014\u0001\u0014\u0001"+
+		"\u0014\u0001\u0015\u0001\u0015\u0001\u0016\u0001\u0016\u0001\u0017\u0001"+
 		"\u0017\u0001\u0018\u0001\u0018\u0001\u0018\u0000\u0001\u001e\u0019\u0000"+
 		"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c"+
-		"\u001e \"$&(*,.0\u0000\u0003\u0001\u0000()\u0001\u0000\u0015\u0018\u0003"+
-		"\u0000\u0005\u0005\u0012\u0012\u001c%\u00e0\u00005\u0001\u0000\u0000\u0000"+
-		"\u0002A\u0001\u0000\u0000\u0000\u0004C\u0001\u0000\u0000\u0000\u0006G"+
-		"\u0001\u0000\u0000\u0000\bJ\u0001\u0000\u0000\u0000\nO\u0001\u0000\u0000"+
+		"\u001e \"$&(*,.0\u0000\u0003\u0001\u0000\u0015\u0018\u0003\u0000\u0005"+
+		"\u0005\u0012\u0012\u001c%\u0001\u0000()\u00e0\u00005\u0001\u0000\u0000"+
+		"\u0000\u0002A\u0001\u0000\u0000\u0000\u0004C\u0001\u0000\u0000\u0000\u0006"+
+		"G\u0001\u0000\u0000\u0000\bJ\u0001\u0000\u0000\u0000\nO\u0001\u0000\u0000"+
 		"\u0000\fZ\u0001\u0000\u0000\u0000\u000e]\u0001\u0000\u0000\u0000\u0010"+
 		"f\u0001\u0000\u0000\u0000\u0012h\u0001\u0000\u0000\u0000\u0014{\u0001"+
 		"\u0000\u0000\u0000\u0016\u0083\u0001\u0000\u0000\u0000\u0018\u0089\u0001"+
 		"\u0000\u0000\u0000\u001a\u0092\u0001\u0000\u0000\u0000\u001c\u0097\u0001"+
 		"\u0000\u0000\u0000\u001e\u00af\u0001\u0000\u0000\u0000 \u00ba\u0001\u0000"+
 		"\u0000\u0000\"\u00c4\u0001\u0000\u0000\u0000$\u00c6\u0001\u0000\u0000"+
-		"\u0000&\u00c8\u0001\u0000\u0000\u0000(\u00ca\u0001\u0000\u0000\u0000*"+
-		"\u00d1\u0001\u0000\u0000\u0000,\u00d4\u0001\u0000\u0000\u0000.\u00d7\u0001"+
+		"\u0000&\u00cd\u0001\u0000\u0000\u0000(\u00d0\u0001\u0000\u0000\u0000*"+
+		"\u00d3\u0001\u0000\u0000\u0000,\u00d5\u0001\u0000\u0000\u0000.\u00d7\u0001"+
 		"\u0000\u0000\u00000\u00d9\u0001\u0000\u0000\u000024\u0003\u0002\u0001"+
 		"\u000032\u0001\u0000\u0000\u000047\u0001\u0000\u0000\u000053\u0001\u0000"+
 		"\u0000\u000056\u0001\u0000\u0000\u00006\u0001\u0001\u0000\u0000\u0000"+
 		"75\u0001\u0000\u0000\u00008B\u0003\u0004\u0002\u00009B\u0003\n\u0005\u0000"+
 		":B\u0003\u000e\u0007\u0000;B\u0003\u0012\t\u0000<B\u0003\u001a\r\u0000"+
-		"=B\u0003\u0018\f\u0000>B\u0003*\u0015\u0000?B\u0003,\u0016\u0000@B\u0003"+
-		"(\u0014\u0000A8\u0001\u0000\u0000\u0000A9\u0001\u0000\u0000\u0000A:\u0001"+
+		"=B\u0003\u0018\f\u0000>B\u0003&\u0013\u0000?B\u0003(\u0014\u0000@B\u0003"+
+		"$\u0012\u0000A8\u0001\u0000\u0000\u0000A9\u0001\u0000\u0000\u0000A:\u0001"+
 		"\u0000\u0000\u0000A;\u0001\u0000\u0000\u0000A<\u0001\u0000\u0000\u0000"+
 		"A=\u0001\u0000\u0000\u0000A>\u0001\u0000\u0000\u0000A?\u0001\u0000\u0000"+
 		"\u0000A@\u0001\u0000\u0000\u0000B\u0003\u0001\u0000\u0000\u0000CD\u0003"+
@@ -1877,15 +1877,15 @@ public class MiLenguajeParser extends Parser {
 		"\u000f\uffff\uffff\u0000\u00a3\u00a4\u0005\u000f\u0000\u0000\u00a4\u00a5"+
 		"\u0003\u001e\u000f\u0000\u00a5\u00a6\u0005\u0010\u0000\u0000\u00a6\u00b0"+
 		"\u0001\u0000\u0000\u0000\u00a7\u00b0\u0005\'\u0000\u0000\u00a8\u00b0\u0003"+
-		"\"\u0011\u0000\u00a9\u00b0\u0003$\u0012\u0000\u00aa\u00b0\u0003 \u0010"+
+		",\u0016\u0000\u00a9\u00b0\u0003.\u0017\u0000\u00aa\u00b0\u0003 \u0010"+
 		"\u0000\u00ab\u00b0\u0003\u001a\r\u0000\u00ac\u00ad\u0005\u0012\u0000\u0000"+
-		"\u00ad\u00b0\u0003\u001e\u000f\u0002\u00ae\u00b0\u0003(\u0014\u0000\u00af"+
+		"\u00ad\u00b0\u0003\u001e\u000f\u0002\u00ae\u00b0\u0003$\u0012\u0000\u00af"+
 		"\u00a2\u0001\u0000\u0000\u0000\u00af\u00a7\u0001\u0000\u0000\u0000\u00af"+
 		"\u00a8\u0001\u0000\u0000\u0000\u00af\u00a9\u0001\u0000\u0000\u0000\u00af"+
 		"\u00aa\u0001\u0000\u0000\u0000\u00af\u00ab\u0001\u0000\u0000\u0000\u00af"+
 		"\u00ac\u0001\u0000\u0000\u0000\u00af\u00ae\u0001\u0000\u0000\u0000\u00b0"+
 		"\u00b7\u0001\u0000\u0000\u0000\u00b1\u00b2\n\b\u0000\u0000\u00b2\u00b3"+
-		"\u0003.\u0017\u0000\u00b3\u00b4\u0003\u001e\u000f\t\u00b4\u00b6\u0001"+
+		"\u0003*\u0015\u0000\u00b3\u00b4\u0003\u001e\u000f\t\u00b4\u00b6\u0001"+
 		"\u0000\u0000\u0000\u00b5\u00b1\u0001\u0000\u0000\u0000\u00b6\u00b9\u0001"+
 		"\u0000\u0000\u0000\u00b7\u00b5\u0001\u0000\u0000\u0000\u00b7\u00b8\u0001"+
 		"\u0000\u0000\u0000\u00b8\u001f\u0001\u0000\u0000\u0000\u00b9\u00b7\u0001"+
@@ -1895,17 +1895,18 @@ public class MiLenguajeParser extends Parser {
 		"\u0000\u0000\u00c0\u00c3\u0001\u0000\u0000\u0000\u00c1\u00bf\u0001\u0000"+
 		"\u0000\u0000\u00c1\u00c2\u0001\u0000\u0000\u0000\u00c2!\u0001\u0000\u0000"+
 		"\u0000\u00c3\u00c1\u0001\u0000\u0000\u0000\u00c4\u00c5\u0007\u0000\u0000"+
-		"\u0000\u00c5#\u0001\u0000\u0000\u0000\u00c6\u00c7\u0005*\u0000\u0000\u00c7"+
-		"%\u0001\u0000\u0000\u0000\u00c8\u00c9\u0007\u0001\u0000\u0000\u00c9\'"+
-		"\u0001\u0000\u0000\u0000\u00ca\u00cb\u0003&\u0013\u0000\u00cb\u00cc\u0005"+
-		"\u0019\u0000\u0000\u00cc\u00cd\u0005&\u0000\u0000\u00cd\u00ce\u0005\u000f"+
-		"\u0000\u0000\u00ce\u00cf\u0003\u001c\u000e\u0000\u00cf\u00d0\u0005\u0010"+
-		"\u0000\u0000\u00d0)\u0001\u0000\u0000\u0000\u00d1\u00d2\u0005&\u0000\u0000"+
-		"\u00d2\u00d3\u0005\u001a\u0000\u0000\u00d3+\u0001\u0000\u0000\u0000\u00d4"+
-		"\u00d5\u0005\u001b\u0000\u0000\u00d5\u00d6\u0005&\u0000\u0000\u00d6-\u0001"+
-		"\u0000\u0000\u0000\u00d7\u00d8\u0007\u0002\u0000\u0000\u00d8/\u0001\u0000"+
-		"\u0000\u0000\u00d9\u00da\u0005\u0005\u0000\u0000\u00da1\u0001\u0000\u0000"+
-		"\u0000\u00115AMVbnsw\u0081\u0087\u008e\u0097\u009b\u009f\u00af\u00b7\u00c1";
+		"\u0000\u00c5#\u0001\u0000\u0000\u0000\u00c6\u00c7\u0003\"\u0011\u0000"+
+		"\u00c7\u00c8\u0005\u0019\u0000\u0000\u00c8\u00c9\u0005&\u0000\u0000\u00c9"+
+		"\u00ca\u0005\u000f\u0000\u0000\u00ca\u00cb\u0003\u001c\u000e\u0000\u00cb"+
+		"\u00cc\u0005\u0010\u0000\u0000\u00cc%\u0001\u0000\u0000\u0000\u00cd\u00ce"+
+		"\u0005&\u0000\u0000\u00ce\u00cf\u0005\u001a\u0000\u0000\u00cf\'\u0001"+
+		"\u0000\u0000\u0000\u00d0\u00d1\u0005\u001b\u0000\u0000\u00d1\u00d2\u0005"+
+		"&\u0000\u0000\u00d2)\u0001\u0000\u0000\u0000\u00d3\u00d4\u0007\u0001\u0000"+
+		"\u0000\u00d4+\u0001\u0000\u0000\u0000\u00d5\u00d6\u0007\u0002\u0000\u0000"+
+		"\u00d6-\u0001\u0000\u0000\u0000\u00d7\u00d8\u0005*\u0000\u0000\u00d8/"+
+		"\u0001\u0000\u0000\u0000\u00d9\u00da\u0005\u0005\u0000\u0000\u00da1\u0001"+
+		"\u0000\u0000\u0000\u00115AMVbnsw\u0081\u0087\u008e\u0097\u009b\u009f\u00af"+
+		"\u00b7\u00c1";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

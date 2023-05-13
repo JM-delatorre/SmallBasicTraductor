@@ -2,12 +2,16 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class SmallBasicToPython extends MiLenguajeBaseListener {
     private final StringBuilder codeBuilder = new StringBuilder();
     private int counterTabs = 0;
+    private String builtinName = "";
+    private String builtinFunction = "";
+    private List<String> bulitinArguments = new ArrayList<String>();
 
     @Override public void enterProgram(MiLenguajeParser.ProgramContext ctx) { }
 
@@ -84,8 +88,8 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
 
     /*
     @Override public void enterElseif_statement(MiLenguajeParser.Elseif_statementContext ctx) {
-        String condition = ctx.expRule().getText();
-        codeBuilder.append("} else if ("+condition+") {\n");
+        counterTabs +=1;
+        codeBuilder.append("elif (");
     }
 
     @Override public void exitElseif_statement(MiLenguajeParser.Elseif_statementContext ctx) {
@@ -128,10 +132,12 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
     @Override public void exitExpRule(MiLenguajeParser.ExpRuleContext ctx) { }
 
     @Override public void enterVariable(MiLenguajeParser.VariableContext ctx) {
-        if (ctx.getText().equals("return")) {
-            codeBuilder.append(ctx.getText() + "josuehp");
-        }else {
-            codeBuilder.append(ctx.getText());
+        if(!(this.bulitinArguments.size() > 0)){
+            if (ctx.getText().equals("return")) {
+                codeBuilder.append(ctx.getText() + "josuehp");
+            }else {
+                codeBuilder.append(ctx.getText());
+            }
         }
     }
 
@@ -149,89 +155,40 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
 
     @Override public void exitString(MiLenguajeParser.StringContext ctx) { }
 
-    @Override public void enterBuiltIn(MiLenguajeParser.BuiltInContext ctx) { }
-
-    @Override public void exitBuiltIn(MiLenguajeParser.BuiltInContext ctx) {
-
-        String fname = ctx.builtIn_name().getText();
-        String subfunction = ctx.ID().getSymbol().getText();
-        System.out.println(fname);
-        System.out.println(subfunction);
+    @Override public void enterBuiltIn(MiLenguajeParser.BuiltInContext ctx) {
+        this.builtinName = ctx.builtIn_name().getText();
+        this.builtinFunction = ctx.ID().getSymbol().getText();
         List<MiLenguajeParser.ExpRuleContext> args = ctx.argument_list().expRule();
-
-        switch (fname) {
-            case "Array":
-                arrayFunction(args, subfunction);
-                break;
-            case "Stack":
-                stackFunction(args, subfunction);
-                break;
-            case "Program":
-                /*delay(milliSeconds)
-                End()
-                 */
-                switch (subfunction) {
-                    case "delay":
-                        this.codeBuilder.append("time.sleep("+Integer.valueOf(args.get(0).getText())/1000+")");
-                        break;
-                    case "End":
-                        this.codeBuilder.append("quit()\n");
-                }
-                String programName = args.get(0).getText();
-                this.codeBuilder.append("public static void " + programName + "() {\n");
-                break;
-            case "TextWindow":
-                switch (subfunction) {
-                    case "Write":
-                        this.codeBuilder.append("print(");
-                        if (args.size()==0)
-                            this.codeBuilder.append(")\n");
-                        else {
-                            this.codeBuilder.append(args.get(0).getText());
-                            if (args.size()>1) {
-                                for (int i = 1; i < args.size(); i++) {
-                                    this.codeBuilder.append(", "+args.get(i).getText());
-                                }
-                            }
-                            this.codeBuilder.append(",end=\"\")\n");
-                        }
-                        break;
-                    case "WriteLine":
-                        this.codeBuilder.append("print(");
-                        if (args.size()==0)
-                            this.codeBuilder.append(")\n");
-                        else {
-                            this.codeBuilder.append(args.get(0).getText());
-                            if (args.size()>1) {
-                                for (int i = 1; i < args.size(); i++) {
-                                    this.codeBuilder.append(", "+args.get(i).getText());
-                                }
-                            }
-                            this.codeBuilder.append(")\n");
-                        }
-                        break;
-                    case "Read":
-                        String variableName = args.get(0).getText();
-                        this.codeBuilder.append(variableName + " = input()\n");
-                        break;
-                    case "ReadNumber":
-                        String variableName2 = args.get(0).getText();
-                        this.codeBuilder.append(variableName2 + " = int(input())\n");
-                        break;
-                }
-                break;
+        for (int i = 0; i < args.size(); i++) {
+            if (((args.get(i)).getText()).equals("return")) {
+                this.bulitinArguments.add((args.get(i)).getText() + "josuehp");
+            }else{
+                this.bulitinArguments.add((args.get(i)).getText());
+            }
         }
     }
 
-    public void arrayFunction(List<MiLenguajeParser.ExpRuleContext> args, String nameFunction){
-        /*ContainsIndex(array, index)
-                ContainsValue(array, value)
-                GetAllIndices(array)
-                GetItemCount(array)
-                IsArray(var)
-                RemoveValue(array, index)
-         */
-        switch(nameFunction){
+    @Override public void exitBuiltIn(MiLenguajeParser.BuiltInContext ctx) {
+        switch (this.builtinName) {
+            case "Array":
+                arrayFunction();
+                break;
+            case "Stack":
+                stackFunction();
+                break;
+            case "Program":
+                programFunction();
+                break;
+            case "TextWindow":
+                textWindowFunction();
+        }
+        this.builtinName = "";
+        this.builtinFunction = "";
+        this.bulitinArguments = new ArrayList<String>();
+    }
+
+    public void arrayFunction(){
+        switch(this.builtinFunction){
             case "ContainsIndex":
                 break;
             case "ContainsValue":
@@ -239,28 +196,79 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
             case "GetAllIndices":
                 break;
             case "GetItemCount":
-                this.codeBuilder.append("len("+args.get(0).getText()+")\n");
+                this.codeBuilder.append("len("+this.bulitinArguments.get(0)+")");
                 break;
             case "IsArray":
                 break;
             case "RemoveValue":
-                this.codeBuilder.append("del "+args.get(0).getText()+"["+args.get(1).getText()+"]\n");
+                this.codeBuilder.append("del "+this.bulitinArguments.get(0)+"["+this.bulitinArguments.get(1)+"]");
                 break;
         }
     }
 
-    public void stackFunction(List<MiLenguajeParser.ExpRuleContext> args, String nameFunction){
-        switch(nameFunction){
+    public void stackFunction(){
+        switch(this.builtinFunction){
 
             case "PushValue":
-                this.codeBuilder.append(args.get(0).getText()+".push("+args.get(1).getText()+")\n");
+                this.codeBuilder.append(this.bulitinArguments.get(0)+".push("+this.bulitinArguments.get(1)+")");
                 break;
             case "PopValue":
-                this.codeBuilder.append(args.get(0).getText()+".pop()\n");
+                this.codeBuilder.append(this.bulitinArguments.get(0)+".pop()");
                 break;
             case "GetCount":
-                this.codeBuilder.append(args.get(0).getText()+".size()\n");
+                this.codeBuilder.append(this.bulitinArguments.get(0)+".size()");
                 break;
+        }
+    }
+
+    public void textWindowFunction(){
+        switch (this.builtinFunction) {
+            case "Write":
+                this.codeBuilder.append("print(");
+                if (this.bulitinArguments.size()==0)
+                    this.codeBuilder.append(")");
+                else {
+                    this.codeBuilder.append(this.bulitinArguments.get(0));
+                    if (this.bulitinArguments.size()>1) {
+                        for (int i = 1; i < this.bulitinArguments.size(); i++) {
+                            this.codeBuilder.append(", "+this.bulitinArguments.get(i));
+                        }
+                    }
+                    this.codeBuilder.append(",end=\"\")");
+                }
+                break;
+            case "WriteLine":
+                this.codeBuilder.append("print(");
+                if (this.bulitinArguments.size()==0)
+                    this.codeBuilder.append(")");
+                else {
+                    this.codeBuilder.append(this.bulitinArguments.get(0));
+                    if (this.bulitinArguments.size()>1) {
+                        for (int i = 1; i < this.bulitinArguments.size(); i++) {
+                            this.codeBuilder.append(", "+this.bulitinArguments.get(i));
+                        }
+                    }
+                    this.codeBuilder.append(")");
+                }
+                break;
+            case "Read":
+                String variableName = this.bulitinArguments.get(0);
+                this.codeBuilder.append(variableName + " = input()");
+                break;
+            case "ReadNumber":
+                String variableName2 = this.bulitinArguments.get(0);
+                this.codeBuilder.append(variableName2 + " = int(input())");
+                break;
+        }
+    }
+
+    public void programFunction(){
+        switch (this.builtinFunction) {
+            case "delay":
+                this.codeBuilder.append("time.sleep("+Integer.valueOf(this.bulitinArguments.get(0))/1000+")");
+                break;
+            case "End":
+                this.codeBuilder.append("quit()\n");
         }
     }
 
