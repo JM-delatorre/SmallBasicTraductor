@@ -1,19 +1,22 @@
-n = 3
-factorial_recursivo()
-n = return
-factorial_recursivo()
-TextWindow.WriteLine(return)
+' Estructuras de datos
 
-Sub factorial_recursivo
-   If (n = 1) Then
-      return = 1
-   Else
-      Stack.PushValue(factorial_params, n)
-      n = n - 1
-      factorial_recursivo()
-      res = return
+tamaño_del_arreglo = 5
 
-      n = Stack.PopValue(factorial_params)
-      return = n * return
-   EndIf
-EndSub
+For i = 1 To tamaño_del_arreglo
+   userNums[i] = i * 2
+   userVals[4-i] = (4 * i) / 2
+EndFor
+
+Stack.PushValue(mi_stack, userNums[3])
+Stack.PushValue(mi_stack, userVals[3])
+
+For i = 1 To tamaño_del_arreglo
+   mi_dict["Parte " + i] = userNums[i]
+EndFor
+
+y = Stack.PopValue(mi_stack)
+x = Stack.PopValue(mi_stack)
+
+For i = 1 To tamaño_del_arreglo
+   TextWindow.WriteLine(mi_dict["Parte " + i] - x + y)
+EndFor
