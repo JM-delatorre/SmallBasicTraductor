@@ -17,7 +17,9 @@ subroutine   : 'Sub' ID statement+ 'EndSub';
 subroutine_call : ID '(' ')';
 // hacer
 argument_list : expRule? (',' expRule?)*;
-expRule       : '(' expRule ')' | expRule op expRule | boolean | number | string | variable | subroutine_call | '-' expRule | builtIn;
+expRule       : expRuleParent | expRule op expRule | boolean | number | string | variable | subroutine_call | expRuleMinus | builtIn;
+expRuleParent : '(' expRule ')';
+expRuleMinus: '-' expRule;
 variable      : ID (variable_dict)*;
 variable_dict :'[' expRule ']';
 builtIn_name  : 'Array'| 'Stack' | 'Program' | 'TextWindow' ;
@@ -31,7 +33,6 @@ boolean       : ( TRUE | FALSE );
 assign: '=';
 
 ID            : [a-zA-Z\u00c0-\u00ff][a-zA-Z\u00c0-\u00ff0-9_]*;
-//BOOL          : '"'([Ff][aA][lL][sS][eE] | [Tt][rR][uU][eE])'"';
 FALSE          : '"'[Ff][aA][lL][sS][eE]'"';
 TRUE           : '"'[Tt][rR][uU][eE]'"';
 INT           : [0-9]+;

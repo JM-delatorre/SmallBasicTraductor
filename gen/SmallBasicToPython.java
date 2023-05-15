@@ -213,12 +213,32 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
 
     @Override public void exitExpRule(MiLenguajeParser.ExpRuleContext ctx) { }
 
+    @Override public void enterExpRuleParent(MiLenguajeParser.ExpRuleParentContext ctx) {
+        if ((!this.activeTag.equals("")) && ((Boolean) (this.tags.get(this.activeTag)[0])) && this.tags.get(this.activeTag)[1].equals("beginGoto"))
+            return;
+        this.codeBuilder.append('(');
+    }
+
+    @Override public void exitExpRuleParent(MiLenguajeParser.ExpRuleParentContext ctx) {
+        if ((!this.activeTag.equals("")) && ((Boolean) (this.tags.get(this.activeTag)[0])) && this.tags.get(this.activeTag)[1].equals("beginGoto"))
+            return;
+        this.codeBuilder.append(')');
+    }
+
+    @Override public void enterExpRuleMinus(MiLenguajeParser.ExpRuleMinusContext ctx) {
+        if ((!this.activeTag.equals("")) && ((Boolean) (this.tags.get(this.activeTag)[0])) && this.tags.get(this.activeTag)[1].equals("beginGoto"))
+            return;
+        this.codeBuilder.append('-');
+    }
+
+    @Override public void exitExpRuleMinus(MiLenguajeParser.ExpRuleMinusContext ctx) { }
+
     @Override public void enterVariable(MiLenguajeParser.VariableContext ctx) {
         if ((!this.activeTag.equals("")) && ((Boolean) (this.tags.get(this.activeTag)[0])) && this.tags.get(this.activeTag)[1].equals("beginGoto"))
             return;
         if(!(this.builtinArguments.size() > 0)){
             if (this.flattenToAscii(ctx.ID().getSymbol().getText()).equals("return")) {
-                codeBuilder.append(flattenToAscii(ctx.ID().getSymbol().getText()) + "josuehp");
+                codeBuilder.append(flattenToAscii(ctx.ID().getSymbol().getText()) + "prima");
             }else {
                 codeBuilder.append(flattenToAscii(ctx.ID().getSymbol().getText()));
             }
@@ -269,7 +289,7 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
         List<MiLenguajeParser.ExpRuleContext> args = ctx.argument_list().expRule();
         for (int i = 0; i < args.size(); i++) {
             if (((args.get(i)).getText()).equals("return")) {
-                this.builtinArguments.add((args.get(i)).getText() + "josuehp");
+                this.builtinArguments.add((args.get(i)).getText() + "prima");
             }else{
                 this.builtinArguments.add((args.get(i)).getText());
             }
@@ -337,13 +357,13 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
         switch(this.builtinFunction){
 
             case "PushValue":
-                this.codeBuilder.append(this.builtinArguments.get(0)+".push("+this.builtinArguments.get(1)+")");
+                this.codeBuilder.append(this.builtinArguments.get(0)+".append("+this.builtinArguments.get(1)+")");
                 break;
             case "PopValue":
                 this.codeBuilder.append(this.builtinArguments.get(0)+".pop()");
                 break;
             case "GetCount":
-                this.codeBuilder.append(this.builtinArguments.get(0)+".size()");
+                this.codeBuilder.append("len(" + this.builtinArguments.get(0)+")");
                 break;
         }
     }
@@ -357,7 +377,7 @@ public class SmallBasicToPython extends MiLenguajeBaseListener {
                 if (this.builtinArguments.size()==0)
                     this.codeBuilder.append(")");
                 else {
-                    this.codeBuilder.append(this.builtinArguments.get(0));
+                    this.codeBuilder.append(this.builtinArguments.get(0) );
                     if (this.builtinArguments.size()>1) {
                         for (int i = 1; i < this.builtinArguments.size(); i++) {
                             this.codeBuilder.append(", "+this.builtinArguments.get(i));

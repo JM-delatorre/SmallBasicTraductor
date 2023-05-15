@@ -1,22 +1,48 @@
-' Estructuras de datos
+' Ciclos, etiquetas y ramificaciones
 
-tamaño_del_arreglo = 5
+Goto salto
 
-For i = 1 To tamaño_del_arreglo
-   userNums[i] = i * 2
-   userVals[4-i] = (4 * i) / 2
-EndFor
+TextWindow.WriteLine("Esto no debe imprimirse")
 
-Stack.PushValue(mi_stack, userNums[3])
-Stack.PushValue(mi_stack, userVals[3])
+salto:
 
-For i = 1 To tamaño_del_arreglo
-   mi_dict["Parte " + i] = userNums[i]
-EndFor
+i = 20
 
-y = Stack.PopValue(mi_stack)
-x = Stack.PopValue(mi_stack)
+While (i > 0)
+   test3 = i - 3 * (i / 3)
+   test5 = i - 5 * (i / 5)
 
-For i = 1 To tamaño_del_arreglo
-   TextWindow.WriteLine(mi_dict["Parte " + i] - x + y)
-EndFor
+   If (test3 = 0 And test5 = 0) Then
+      TextWindow.WriteLine(i + " Fizzbuzz")
+   ElseIf (test3 = 0) Then
+      TextWindow.WriteLine(i + " Fizz")
+   ElseIf (test5 = 0) Then
+      TextWindow.WriteLine(i + " Buzz")
+   EndIf
+
+   i = i - 1
+EndWhile
+
+TextWindow.WriteLine("")
+TextWindow.WriteLine("- Con etiquetas -")
+TextWindow.WriteLine("")
+
+i = 20
+
+loop:
+test3 = i - 3 * (i / 3)
+test5 = i - 5 * (i / 5)
+
+If (test3 = 0 And test5 = 0) Then
+   TextWindow.WriteLine(i + " Fizzbuzz")
+ElseIf (test3 = 0) Then
+   TextWindow.WriteLine(i + " Fizz")
+ElseIf (test5 = 0) Then
+   TextWindow.WriteLine(i + " Buzz")
+EndIf
+
+i = i - 1
+
+If (i > 0) Then
+   Goto loop
+EndIf

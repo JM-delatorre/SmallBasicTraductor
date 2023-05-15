@@ -16,7 +16,6 @@ public class Main {
             MiLenguajeParser parser = new MiLenguajeParser(tokens);
 
             ParseTree tree = parser.program(); // Iniciar el analisis sintáctico en la regla inicial: r
-            System.out.println(tree.toStringTree(parser));
             //walker pasa por los tokens
             ParseTreeWalker walker = new ParseTreeWalker();
             SmallBasicToPython listener = new SmallBasicToPython();
